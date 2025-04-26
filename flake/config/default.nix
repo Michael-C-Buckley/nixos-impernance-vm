@@ -22,6 +22,7 @@
     michael = {
       isNormalUser = true;
       password = "asfdasdf";
+      extraGroups = ["wheel"];
     };
   };
 
