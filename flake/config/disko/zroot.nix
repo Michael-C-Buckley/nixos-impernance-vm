@@ -3,15 +3,13 @@ let
     mountpoint = mount;
     options.mountpoint = "legacy";
     type = "zfs_fs";
-    # neededForBoot = true;
   };
 in {
   type = "zpool";
   datasets = {
-    # "root" = mkZfsLegacyFs "/";
     "nix" = mkZfsLegacyFs "/nix";
-    "home" = mkZfsLegacyFs "/home";
     "persist" = mkZfsLegacyFs "/persist";
+    "cache" = mkZfsLegacyFs "/cache";
   };
   options = {
     ashift = "12";
