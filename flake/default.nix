@@ -17,8 +17,8 @@
         system = "x86_64-linux";
         modules = [
           inputs.disko.nixosModules.disko
-          ./configuration.nix
-          ./hardware-configuration.nix
+          inputs.impermanence.nixosModules.impermanence
+          ./config
         ];
       };
     };

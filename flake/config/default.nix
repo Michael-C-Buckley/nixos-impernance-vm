@@ -8,6 +8,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disko
+    ./hardware.nix
+    ./impermanence.nix
   ];
   networking.hostId = "11111111";
 

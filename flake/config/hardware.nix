@@ -10,7 +10,10 @@
 }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
+  fileSystems."/persist".neededForBoot = true;
 
   boot.loader = {
     grub.enable = lib.mkForce false;

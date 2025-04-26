@@ -3,6 +3,7 @@ let
     mountpoint = mount;
     options.mountpoint = "legacy";
     type = "zfs_fs";
+    # neededForBoot = true;
   };
 in {
   type = "zpool";
