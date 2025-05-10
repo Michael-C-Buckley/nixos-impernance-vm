@@ -14,16 +14,23 @@ Building is a two-step process:
 * Execute the instructions
 
 `nix build` will create the instructions as I've aliased the disko build output.
-`sudo ./result --build-memory 8192` will create and run the helper VM to build the image.  Adjust memory as needed/availible.
-
-The final disk output will be `main.raw` in the local directory.  It can be run with QEMU, you may want to `chown` it to your user.
+`./result --build-memory 8192` will create and run the helper VM to build the image.  Adjust memory as needed/availible.
 
 ### Run the VM
 
+Use `nix-locate` to find the OVMF path.
 This is mostly for my convenience:
 
 ```
-qemu-system-x86_64 -m 8G -machine type=q35,accel=kvm -smp 4 -drive format=raw,file=main.raw -cpu host -display default -vga virtio -bios /nix/store/rca6khqlw5bykxqwnkbgb8r5fv0kj5ad-OVMF-202411-fd/FV/OVMF.fd
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 8G \
+  -smp 4 \
+  -drive file=main.raw,format=raw,if=virtio \
+  -device virtio-net-pci,netdev=net0 \
+  -netdev user,id=net0,hostfwd=tcp::2222-:22 \
+  -nographic \
+  -serial mon:stdio \
+  -bios /nix/store/ypfbsa465m41zyxkcdgqhlgc7j9411di-OVMF-202411-fd/FV/OVMF.fd
 ```
-
-Use `nix-locate` to find the OVMF path.

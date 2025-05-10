@@ -1,7 +1,6 @@
 {
   modulesPath,
-  lib,
-  pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -10,12 +9,11 @@
     ./disko
     ./hardware.nix
     ./impermanence.nix
+    #inputs.nixos.nixosModules.hjem.default
+    inputs.nixos.inputs.home-manager.nixosModule.default
+    inputs.nixos.homeConfiguration.michael
   ];
   networking.hostId = "11111111";
-
-  environment.systemPackages = with pkgs; map lib.lowPrio [
-    neovim
-  ];
 
   users.users = {
     root.password = "root1234";
